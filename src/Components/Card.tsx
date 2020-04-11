@@ -6,7 +6,7 @@ const Elem = styled.div`
 ${Theme.shadow}
 min-width: 380px;
 min-height: 300px;
-max-width: 500px;
+max-width: 400px;
 margin: 10px;
 .card-title {
    background-color: #FF5252;

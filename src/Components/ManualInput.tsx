@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 
 const Section = styled.section`
@@ -39,7 +39,7 @@ const Row = styled.div`
   flex-direction: row;
   width: 100%;
 `
-const Cell = styled.td`
+const Cell = styled.div`
   flex-grow: 1;
   min-height: 30px;
   box-sizing: border-box;
@@ -54,13 +54,7 @@ const Cell = styled.td`
   border-width: 0 0 0 1px;
 `
 
-interface TableButtonProps {
-  children: React.ReactNode,
-  className?: string,
-  selected?: boolean
-}
-
-const TableButtonElement = ({children, className }: TableButtonProps) => <button className={className}>
+const TableButtonElement = ({children, ...props}: any) => <button {...props}>
   {children}
 </button>
 
@@ -74,13 +68,15 @@ const TableButton = styled(TableButtonElement)`
 `
 
 
-const SelectionGroup = ({ selected, options, type }: { selected: string, options: string[], type: string }) => {
+const SelectionGroup = ({ selected, options, type, onSelect, selectedType }: { selected: string, options: string[], type: string, onSelect?: Function, selectedType?: string }) => {
   return (
     <Cell>
       {
         options.map(option =>
                     <TableButton
-                      selected={selected === option}>
+                      key={option}
+                      onClick={() => { onSelect && onSelect(type, option)}}
+                      selected={selected === option && type === selectedType }>
                       {option}
                       </TableButton>
         )
@@ -90,11 +86,36 @@ const SelectionGroup = ({ selected, options, type }: { selected: string, options
 }
 
 const PASS_TYPES= ['Open-Play', 'Kick-off', 'Throw-in']
-const BP = ({type}: {type: string}) => <SelectionGroup type={type} options={['LF', 'H', 'RF']} selected='' />
-const Height= ({type}: {type: string}) => <SelectionGroup type={type} options={['G', 'L', 'H']} selected='' />
-const Extras = ({type}: {type: string}) => <SelectionGroup type={type }options={['A', 'BW']}  selected='BW' />
-const PassTable = () =>
-  <PassTableElement>
+const PassTable = () => {
+const [selectedType, setSelectedType] = useState<string>('')
+const [selectedBP, setSelectedBP] = useState<string>('')
+const [selectedHeight, setSelectedHeight] = useState<string>('')
+const [selectedExtra, setSelectedExtra] = useState<string>('')
+const onSelectBP = (type: string, option: string) => {
+  if(type !== selectedType){
+     setSelectedType(type)
+     setSelectedHeight('')
+     setSelectedExtra('')
+  }
+  setSelectedBP(option)
+}
+const onSelectHeight = (type: string, option: string) => {
+  if(type !== selectedType){
+     setSelectedType(type)
+     setSelectedBP('')
+     setSelectedExtra('')
+  }
+  setSelectedHeight(option)
+}
+const onSelectExtra = (type: string, option: string) => {
+  if(type !== selectedType){
+     setSelectedType(type)
+     setSelectedBP('')
+     setSelectedHeight('')
+  }
+  setSelectedExtra(option)
+}
+  return <PassTableElement>
   <Row>
     <Cell>Type</Cell>
     <Cell>Height</Cell>
@@ -102,31 +123,49 @@ const PassTable = () =>
     <Cell>Extras</Cell>
   </Row>
     { PASS_TYPES.map(type =>
-      <Row>
+      <Row key={type}>
         <Cell>{type}</Cell>
-        <Height type={type} />
-        <BP type={type} />
-        <Extras type={type} />
+        <SelectionGroup type={type} options={['L', 'H', 'G']} selected={selectedHeight} selectedType={selectedType} onSelect={onSelectHeight} />
+        <SelectionGroup type={type} options={['LF', 'H', 'RF']} selected={selectedBP} selectedType={selectedType} onSelect={onSelectBP} />
+        <SelectionGroup type={type} options={['A', 'BW']} selected={selectedExtra} selectedType={selectedType} onSelect={onSelectExtra} />
       </Row>
     )}
   </PassTableElement>
-
+}
 const SHOOT_TYPES = ['Open-Play', 'Free-kick', 'Penalty', 'Corner']
-const ShootTable = () => <PassTableElement>
+const ShootTable = () => {
+const [selectedType, setSelectedType] = useState<string>('')
+const [selectedBP, setSelectedBP] = useState<string>('')
+const [selectedExtra, setSelectedExtra] = useState<string>('')
+const onSelectBP = (type: string, option: string) => {
+  if(type !== selectedType){
+     setSelectedType(type)
+     setSelectedExtra('')
+  }
+  setSelectedBP(option)
+}
+const onSelectExtra = (type: string, option: string) => {
+  if(type !== selectedType){
+     setSelectedType(type)
+     setSelectedBP('')
+  }
+  setSelectedExtra(option)
+}
+return <PassTableElement>
   <Row>
     <Cell>Type</Cell>
     <Cell>BP</Cell>
     <Cell>Extras</Cell>
   </Row>
     { SHOOT_TYPES.map(type =>
-      <Row>
+      <Row key={type}>
         <Cell>{type}</Cell>
-        <BP type={type} />
-        <Extras type={type} />
+        <SelectionGroup type={type} options={['LF', 'H', 'RF']} selected={selectedBP} selectedType={selectedType} onSelect={onSelectBP} />
+        <SelectionGroup type={type} options={['A', 'BW']} selected={selectedExtra} selectedType={selectedType} onSelect={onSelectExtra} />
       </Row>
     )}
   </PassTableElement>
-
+}
 export const ManualInput = () => <Fragment>
   <Section>
      <SectionTitle>Pass</SectionTitle>
