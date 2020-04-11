@@ -7,7 +7,6 @@ const Elem = styled.div`
   width: 100%;
   max-width: 1080px;
   height: 300px;
-  margin: 10px;
   background: #ccc;
 `
 

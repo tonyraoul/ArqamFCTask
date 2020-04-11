@@ -20,7 +20,7 @@ interface AppProps {
 const App = ({ className }:AppProps) =>
     <div className={className}>
       <GlobalStyle />
-      <Header />
+      {/* <Header /> */}
       <div className='container'>
         <div className='left-column column' >
           <Card title='Quick Shortcuts'>

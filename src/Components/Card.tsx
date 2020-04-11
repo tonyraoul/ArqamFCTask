@@ -7,7 +7,7 @@ ${Theme.shadow}
 min-width: 380px;
 min-height: 300px;
 max-width: 400px;
-margin: 10px;
+margin: 10px 0;
 .card-title {
    background-color: #FF5252;
    color: white;
