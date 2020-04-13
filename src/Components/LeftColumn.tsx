@@ -2,6 +2,7 @@ import React from 'react'
 import {VideoPlayer} from './VideoPlayer'
 import styled from 'styled-components'
 import {Card} from './Card'
+import { History } from './History'
 
 const Container= styled.div`
   display: flex;
@@ -49,6 +50,7 @@ export default () => <Container>
   </Section>
   <Section>
     <Card title='History'>
+      <History />
     </Card>
   </Section>
 </Container>

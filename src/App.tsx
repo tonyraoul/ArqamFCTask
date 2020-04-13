@@ -5,9 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import {QuickShortcuts} from './Fragments/QuickShortcuts';
 import LeftColumn from './Components/LeftColumn';
-import {ManualInput} from './Components/ManualInput';
-
-import { Provider } from 'react-redux'
+import { ManualInput } from './Components/ManualInput';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
