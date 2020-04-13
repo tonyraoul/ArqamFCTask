@@ -2,10 +2,22 @@ import React, { Fragment, useState } from 'react'
 import styled from 'styled-components'
 
 const Section = styled.section`
-  margin: 10px;
+  margin: 10px 0;
 `
 
 const SectionTitle = styled.h3`
+  margin: 0 10px;
+  font-family: IBM Plex Mono;
+  text-transform: uppercase;
+`
+
+const Underline = styled.div `
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: red;
+  padding-bottom: 6px;
+  width: 80%;
+  margin: auto;
 `
 
 const TableElement = ({children, className }: {children: React.ReactNode, className?: string}) =>
@@ -23,6 +35,7 @@ const PassTableElement = styled(TableElement)`
     padding: 5px;
     background-color: #FF5252;
     color: white;
+    cursor: pointer;
     border: 0;
   }
   .table {
@@ -50,8 +63,17 @@ const Cell = styled.div`
   font-size: 12px;
   align-content: center;
   text-align: center;
-  border: 1px solid black;
-  border-width: 0 0 0 1px;
+  border-style: solid;
+  border-color: black;
+  :not(:first-of-type){
+    border-width: 0 0 0 1px;
+  }
+  &.title {
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  font-family: IBM Plex Sans;
 `
 
 const TableButtonElement = ({children, ...props}: any) => <button {...props}>
@@ -60,11 +82,18 @@ const TableButtonElement = ({children, ...props}: any) => <button {...props}>
 
 const TableButton = styled(TableButtonElement)`
  background: #fff;
- padding: 2px;
- margin: 0 5px;
+ padding: 6px 5px;
+ line-height: 4px;
  shadow: none;
  font-size: 12px;
- border: ${({ selected }) => selected ? '1px solid orange' : '0px'};
+ cursor: pointer;
+ ::-moz-focus-inner {
+  border: 0;
+ }
+ border: ${({ selected }) => selected ? '1px solid orange' : '1px solid transparent'};
+ &:hover {
+  background: #DDD;
+ }
 `
 
 
@@ -117,10 +146,10 @@ const onSelectExtra = (type: string, option: string) => {
 }
   return <PassTableElement>
   <Row>
-    <Cell>Type</Cell>
-    <Cell>Height</Cell>
-    <Cell>BP</Cell>
-    <Cell>Extras</Cell>
+    <Cell className='title' >Type<Underline style={{borderColor: '#00FF38'}}/></Cell>
+    <Cell className='title' >Height<Underline style={{borderColor: '#0066FF'}}/></Cell>
+    <Cell className='title' >BP<Underline style={{borderColor: '#FDCC21'}}/></Cell>
+    <Cell className='title' >Extras<Underline style={{borderColor: '#FD21E7'}}/></Cell>
   </Row>
     { PASS_TYPES.map(type =>
       <Row key={type}>
@@ -153,9 +182,12 @@ const onSelectExtra = (type: string, option: string) => {
 }
 return <PassTableElement>
   <Row>
-    <Cell>Type</Cell>
-    <Cell>BP</Cell>
-    <Cell>Extras</Cell>
+    <Cell className='title'>
+       Type
+      <Underline style={{borderColor: '#00FF38'}}/>
+    </Cell>
+    <Cell className='title'>BP<Underline style={{borderColor: '#FDCC21'}}/></Cell>
+    <Cell className='title'>Extras<Underline style={{borderColor: '#FD21E7'}}/></Cell>
   </Row>
     { SHOOT_TYPES.map(type =>
       <Row key={type}>
@@ -168,11 +200,11 @@ return <PassTableElement>
 }
 export const ManualInput = () => <Fragment>
   <Section>
-     <SectionTitle>Pass</SectionTitle>
+     <SectionTitle>Passes</SectionTitle>
      <PassTable />
   </Section>
   <Section>
-     <SectionTitle>Shoot</SectionTitle>
+     <SectionTitle>Shoots</SectionTitle>
      <ShootTable />
   </Section>
 </Fragment>

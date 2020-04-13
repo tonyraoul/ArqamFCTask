@@ -8,10 +8,19 @@ min-width: 380px;
 min-height: 300px;
 max-width: 400px;
 margin: 10px 0;
-.card-title {
-   background-color: #FF5252;
-   color: white;
-   padding: 5px;
+border-radius: 12px;
+.card-title {   
+  font-family: IBM Plex Mono;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  padding: 5px;
+  border-radius: 12px 12px 0 0 ;
+  background: linear-gradient(90deg, #FF0000, #FF7A00, #FF7A00);
  }
 `
 

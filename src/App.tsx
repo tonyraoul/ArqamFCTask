@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from './Components/Header';
+// import { Header } from './Components/Header';
 import { Card } from './Components/Card';
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
@@ -7,12 +7,12 @@ import {QuickShortcuts} from './Fragments/QuickShortcuts';
 import LeftColumn from './Components/LeftColumn';
 import {ManualInput} from './Components/ManualInput';
 
+import { Provider } from 'react-redux'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
   /* other styles */
-
-    `
+  `
 interface AppProps {
   className?: string,
 }
