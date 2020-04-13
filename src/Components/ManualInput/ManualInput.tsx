@@ -9,8 +9,10 @@ import {
          SectionTitle,
          Underline,
        } from './Elements'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addEvent } from '../../Actions';
+import { ApplicationState } from '../../Reducers';
+import { ITogglesState } from '../../Reducers/Toggles';
 const PASS_TYPES= ['Open-Play', 'Kick-off', 'Throw-in']
 const PassTable = () => {
 const [selectedType, setSelectedType] = useState<string>('')
@@ -96,11 +98,11 @@ return <PassTableElement>
   </PassTableElement>
 }
 export const ManualInput = () => {
-
+const HomeGuest = useSelector<ApplicationState, 'HOME' | 'GUEST'>(state => state.Toggles.HomeGuest)
 const dispatch = useDispatch()
 useKey('w', () => {
   console.log('w')
-  dispatch(addEvent({passShoot: 'PASS', type: 'kick-off', Height: 'G', Extras: 'BW'}))
+  dispatch(addEvent({passShoot: 'PASS', type: 'kick-off', Height: 'G', Extras: 'BW', Club: HomeGuest }))
 })
 return (<Fragment>
   <Section>

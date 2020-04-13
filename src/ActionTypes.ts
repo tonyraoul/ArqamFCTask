@@ -1,1 +1,2 @@
 export const ADD_EVENT = 'ADD_EVENT'
+export const TOGGLE_HOMEGUEST = 'TOGGLE_HOMEGUEST'

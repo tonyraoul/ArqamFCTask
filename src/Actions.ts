@@ -1,7 +1,10 @@
-import { ADD_EVENT } from "./ActionTypes";
+import { ADD_EVENT, TOGGLE_HOMEGUEST } from "./ActionTypes";
 
 let eventID = 0;
 
+export interface toggleHomeGuestType {
+  type: typeof TOGGLE_HOMEGUEST,
+}
 export interface AddEventActionType {
     type: typeof ADD_EVENT,
     payload: IEvent 
@@ -16,7 +19,8 @@ export interface IEventContent {
   type: string,
   BP?: 'H' | 'LF' | 'RF',
   Height?: 'G' | 'L' | 'H',
-  Extras?: 'BW' | 'A'
+  Extras?: 'BW' | 'A',
+  Club?: 'HOME' | 'GUEST'
 }
 
 export const addEvent = (EventPayload: IEventContent): AddEventActionType => ({
@@ -28,4 +32,8 @@ export const addEvent = (EventPayload: IEventContent): AddEventActionType => ({
   }
 });
 
-export type ActionType = AddEventActionType
+export const toggleHomeGuest = () => ({
+  type: TOGGLE_HOMEGUEST
+})
+
+export type ActionType = AddEventActionType | toggleHomeGuestType

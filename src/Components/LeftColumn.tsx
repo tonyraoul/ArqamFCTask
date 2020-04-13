@@ -3,6 +3,7 @@ import {VideoPlayer} from './VideoPlayer'
 import styled from 'styled-components'
 import {Card} from './Card'
 import { History } from './History'
+import { MatchTimer } from './ManualInput/MatchTimer'
 
 const Container= styled.div`
   display: flex;
@@ -44,7 +45,7 @@ export default () => <Container>
         <SubTitle>Premium League</SubTitle>
       </HSection>
       <HSection>
-        <Title>45:00</Title>
+        <MatchTimer />
       </HSection>
     </ClockSection>
   </Section>
