@@ -12,12 +12,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { addEvent, toggleHomeGuest, setToggleByName, resetForm } from '../../Actions';
 import { ApplicationState } from '../../Reducers';
-import  { ITogglesState } from '../../Reducers/Toggles';
+import  { TogglesState } from '../../Reducers/Toggles';
 import { Height, TYPE, BP, Extras } from '../../EventsTable';
 
 const PASS_TYPES: TYPE[] = [TYPE.OPENPLAY, TYPE.KICKOFF, TYPE.THROWIN]
 const PassTable = () => {
-const Toggles  = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+const Toggles  = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
 const { PassShoot, Type } = Toggles
 return <PassTableElement>
   <Row>
@@ -43,7 +43,7 @@ return <PassTableElement>
 
 const SHOOT_TYPES: TYPE[] = [TYPE.OPENPLAY, TYPE.FREEKICK, TYPE.PENALTY, TYPE.CORNER]
 const ShootTable = () => {
-const { PassShoot, Type, BP: TogglesBP }  = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+const { PassShoot, Type, BP: TogglesBP }  = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
 return <PassTableElement>
   <Row>
     <Cell className='title'>
@@ -74,7 +74,7 @@ const toggleArrayValue = (value: string, arr: string[]): string[] => {
 }
 
 export const ManualInput = () => {
-const toggles = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+const toggles = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
 const dispatch = useDispatch()
 const submitEvent = () => {
   if(toggles.PassShoot && toggles.BP && toggles.Type) {

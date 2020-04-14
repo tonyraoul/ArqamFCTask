@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { ApplicationState } from '../../Reducers'
-import { ITogglesState } from '../../Reducers/Toggles'
-import { IType, IPassShoot, IExtra } from '../../Types'
+import { TogglesState } from '../../Reducers/Toggles'
+import { IPassShoot } from '../../Types'
 import { setToggleByName, resetForm } from '../../Actions'
 import { TYPE } from '../../EventsTable'
 
-export const TableElement = ({children, className }: {children: React.ReactNode, className?: string}) => {
-  const { HomeClubName, GuestClubName, HomeGuest } = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+export const TableElement = ({children, className }: {children: React.ReactNode; className?: string}) => {
+  const { HomeClubName, GuestClubName, HomeGuest } = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
 return  <div className={className}>
   <div className='table'>{children}</div>
   <div className='submit-button-container'>
@@ -125,11 +125,11 @@ export const TableButton = styled(TableButtonElement)`
  }
 `
 interface SelectionGroupProps {
-  options: string[],
-  type: TYPE,
-  onSelect?: Function,
-  passShoot: IPassShoot,
-  name: 'BP' | 'Extras' | 'Height'
+  options: string[];
+  type: TYPE;
+  onSelect?: Function;
+  passShoot: IPassShoot;
+  name: 'BP' | 'Extras' | 'Height';
 }
 export const SelectionGroup = ({
   options,
@@ -137,9 +137,9 @@ export const SelectionGroup = ({
   passShoot,
   onSelect,
   name,
-  }:SelectionGroupProps) => {
+  }: SelectionGroupProps) => {
   const dispatch = useDispatch()
-  const toggles = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+  const toggles = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
 
   return (
     <Cell>

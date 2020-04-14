@@ -4,7 +4,7 @@ import { Card } from './Components/Card';
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
 import {QuickShortcuts} from './Fragments/QuickShortcuts';
-import LeftColumn from './Components/LeftColumn';
+import { LeftColumn } from './Components/LeftColumn';
 import { ManualInput } from './Components/ManualInput';
 
 const GlobalStyle = createGlobalStyle`
@@ -15,10 +15,10 @@ const GlobalStyle = createGlobalStyle`
   }
   `
 interface AppProps {
-  className?: string,
+  className?: string;
 }
 
-const App = ({ className }:AppProps) =>
+const App = ({ className }: AppProps) =>
     <div className={className}>
       <GlobalStyle />
       <Header />

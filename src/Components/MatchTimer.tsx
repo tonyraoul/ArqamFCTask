@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import addZero from 'add-zero'
 import { ApplicationState } from '../Reducers'
-import { ITogglesState } from '../Reducers/Toggles'
+import { TogglesState } from '../Reducers/Toggles'
 import styled from 'styled-components'
 
 const Elem = styled.div`
@@ -18,7 +18,7 @@ const Elem = styled.div`
 
 export const MatchTimer = () => {
 
-  const { AccMinutes, StartTime } = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+  const { AccMinutes, StartTime } = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
   const [timeDiff, setTimeDiff] = useState(0)
   const [minutes, setMinutes] = useState('')
   const [seconds, setSeconds] = useState('')

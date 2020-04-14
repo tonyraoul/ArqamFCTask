@@ -2,8 +2,8 @@ import React from 'react'
 import addZero from 'add-zero'
 import { useSelector } from 'react-redux'
 import { ApplicationState } from '../Reducers'
-import { IEvent } from '../Actions'
-import { ITogglesState } from '../Reducers/Toggles'
+import { EventType } from '../Actions'
+import { TogglesState } from '../Reducers/Toggles'
 import styled from 'styled-components'
 
 const Time = styled.div`
@@ -37,8 +37,8 @@ const UnorderList = styled.ul`
 `
 
 export const History = () => {
-  const entries = useSelector<ApplicationState, IEvent[]>(state => state.Events.Events)
-  const { HomeClubName, GuestClubName, AccMinutes, StartTime } = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+  const entries = useSelector<ApplicationState, EventType[]>(state => state.Events.Events)
+  const { HomeClubName, GuestClubName, AccMinutes, StartTime } = useSelector<ApplicationState, TogglesState>(state => state.Toggles)
   return <UnorderList>
       {[...entries].reverse().map(entry => {
         const timeDiff = entry.timestamp - StartTime! + AccMinutes

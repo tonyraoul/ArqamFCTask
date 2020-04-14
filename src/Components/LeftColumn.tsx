@@ -48,7 +48,7 @@ const HSection = styled.div`
   flex-direction: column;
 `
 
-export default () => <Container>
+export const LeftColumn = () => <Container>
   <Section>
     <VideoPlayer />
   </Section>

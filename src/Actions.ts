@@ -3,39 +3,39 @@ import { ExtraPamaters } from "./EventsTable";
 
 let eventID = 0;
 
-export interface toggleHomeGuestType {
-  type: typeof TOGGLE_HOMEGUEST,
+export interface ToggleHomeGuestType {
+  type: typeof TOGGLE_HOMEGUEST;
 }
-export interface resetFormType {
-  type: typeof RESET_FORM,
+export interface ResetFormType {
+  type: typeof RESET_FORM;
 }
 
-export interface setToggleByNameType {
-  type: typeof SET_TOGGLE_BY_NAME,
+export interface SetToggleByNameType {
+  type: typeof SET_TOGGLE_BY_NAME;
   payload: {
-    name: string,
-    value: string | string[]
-  }
+    name: string;
+    value: string | string[];
+  };
 }
 export interface AddEventActionType {
-    type: typeof ADD_EVENT,
-    payload: IEvent 
+    type: typeof ADD_EVENT;
+    payload: EventType; 
 }
-export interface IEvent {
-        id: number,
-        timestamp: number,
-        content: IEventContent
+export interface EventType {
+        id: number;
+        timestamp: number;
+        content: EventContent;
 }
-export interface IEventContent {
-  passShoot: 'PASS' | 'SHOOT',
-  type: string,
-  BP?: 'H' | 'LF' | 'RF',
-  Height?: 'G' | 'L' | 'H',
-  Extras?: ExtraPamaters[],
-  Club: 'HOME' | 'GUEST'
+export interface EventContent {
+  passShoot: 'PASS' | 'SHOOT';
+  type: string;
+  BP?: 'H' | 'LF' | 'RF';
+  Height?: 'G' | 'L' | 'H';
+  Extras?: ExtraPamaters[];
+  Club: 'HOME' | 'GUEST';
 }
 
-export const addEvent = (EventPayload: IEventContent): AddEventActionType => ({
+export const addEvent = (EventPayload: EventContent): AddEventActionType => ({
   type: ADD_EVENT,
   payload: {
     id: ++eventID,
@@ -60,4 +60,4 @@ export const resetForm = () => ({
   type: RESET_FORM
 })
 
-export type ActionType = AddEventActionType | toggleHomeGuestType | setToggleByNameType | resetFormType
+export type ActionType = AddEventActionType | ToggleHomeGuestType | SetToggleByNameType | ResetFormType

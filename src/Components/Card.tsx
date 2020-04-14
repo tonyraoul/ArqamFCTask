@@ -25,8 +25,8 @@ border-radius: 12px;
 `
 
 interface CardProps {
- children?: React.ReactNode,
- title: string
+ children?: React.ReactNode;
+ title: string;
 }
 
 export const Card = ({children,  title}: CardProps) => <Elem>

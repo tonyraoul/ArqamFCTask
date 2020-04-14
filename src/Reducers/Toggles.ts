@@ -3,7 +3,7 @@ import { TOGGLE_HOMEGUEST, SET_TOGGLE_BY_NAME, RESET_FORM } from "../ActionTypes
 import { IPassShoot, IType, IHeight, IBP, IExtra } from "../Types";
 import { PassShoot, BodyPart, ExtraPamaters } from "../EventsTable";
 
-export interface ITogglesState {
+export interface TogglesState {
     HomeGuest: 'HOME' | 'GUEST',
     HomeClubName: string,
     GuestClubName: string,
@@ -16,7 +16,7 @@ export interface ITogglesState {
     Extras: ExtraPamaters[],
     AvailableExtras: IExtra[]
 }
-const initialState: ITogglesState = {
+const initialState: TogglesState = {
     HomeGuest: 'HOME',
     HomeClubName: 'Liverpool',
     GuestClubName: 'Tottenham',
