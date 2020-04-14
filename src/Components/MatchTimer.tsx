@@ -3,6 +3,18 @@ import { useSelector } from 'react-redux'
 import addZero from 'add-zero'
 import { ApplicationState } from '../Reducers'
 import { ITogglesState } from '../Reducers/Toggles'
+import styled from 'styled-components'
+
+const Elem = styled.div`
+  font-family: IBM Plex Mono;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 47px;
+  text-align: end;
+  color: #000000;
+`
+
 
 export const MatchTimer = () => {
 
@@ -22,7 +34,7 @@ export const MatchTimer = () => {
    setMinutes(_minutes)
    setSeconds(_seconds)
   }, [timeDiff])
-  return <div>
+  return <Elem>
     {`${minutes}:${seconds}`} 
-  </div>
+  </Elem>
 }

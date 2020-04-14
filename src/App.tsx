@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Header } from './Components/Header';
+import { Header } from './Components/Header';
 import { Card } from './Components/Card';
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
@@ -21,7 +21,7 @@ interface AppProps {
 const App = ({ className }:AppProps) =>
     <div className={className}>
       <GlobalStyle />
-      {/* <Header /> */}
+      <Header />
       <div className='container'>
         <div className='left-column column' >
           <Card title='Quick Shortcuts'>

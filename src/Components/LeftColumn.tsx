@@ -18,19 +18,33 @@ const Section = styled.div`
 `
 
 const Title = styled.h4`
-  color: black;
+font-family: IBM Plex Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 31px;
+text-trasform: uppercase;
 `
 const SubTitle = styled.h5`
-  color: #757575;
+font-family: IBM Plex Sans;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 23px;
+color: #757575;
+text-trasform: uppercase;
 `
 
 const ClockSection = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 2px;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: black;
 `
 const HSection = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
 `
 
@@ -40,11 +54,11 @@ export default () => <Container>
   </Section>
   <Section>
     <ClockSection>
-      <HSection>
+      <HSection style={{flex: 4}}>
         <Title>Liverpool FC vs Totenham FC</Title>
         <SubTitle>Premium League</SubTitle>
       </HSection>
-      <HSection>
+      <HSection style={{flex: 1}}>
         <MatchTimer />
       </HSection>
     </ClockSection>
