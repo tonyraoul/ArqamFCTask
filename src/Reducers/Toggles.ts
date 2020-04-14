@@ -1,7 +1,7 @@
 import { ActionType } from "../Actions";
 import { TOGGLE_HOMEGUEST, SET_TOGGLE_BY_NAME, RESET_FORM } from "../ActionTypes";
 import { IPassShoot, IType, IHeight, IBP, IExtra } from "../Types";
-import { PassShoot, BodyPart } from "../EventsTable";
+import { PassShoot, BodyPart, ExtraPamaters } from "../EventsTable";
 
 export interface ITogglesState {
     HomeGuest: 'HOME' | 'GUEST',
@@ -13,7 +13,7 @@ export interface ITogglesState {
     Type?: IType,
     Height?: IHeight,
     BP?: BodyPart,
-    Extras: IExtra[],
+    Extras: ExtraPamaters[],
     AvailableExtras: IExtra[]
 }
 const initialState: ITogglesState = {

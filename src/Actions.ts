@@ -1,4 +1,5 @@
 import { ADD_EVENT, TOGGLE_HOMEGUEST, SET_TOGGLE_BY_NAME, RESET_FORM } from "./ActionTypes";
+import { ExtraPamaters } from "./EventsTable";
 
 let eventID = 0;
 
@@ -30,7 +31,7 @@ export interface IEventContent {
   type: string,
   BP?: 'H' | 'LF' | 'RF',
   Height?: 'G' | 'L' | 'H',
-  Extras?: 'BW' | 'A',
+  Extras?: ExtraPamaters[],
   Club: 'HOME' | 'GUEST'
 }
 

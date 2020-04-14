@@ -107,7 +107,8 @@ useKey('Enter', () => {
       BP: toggles.BP,
       Height: toggles.Height,
       Club: toggles.HomeGuest,
-      type: toggles.Type
+      type: toggles.Type,
+      Extras: toggles.Extras,
     }))
     dispatch(resetForm())
   }
