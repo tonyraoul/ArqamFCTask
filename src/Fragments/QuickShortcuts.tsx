@@ -23,7 +23,11 @@ export const QuickShortcuts = () => <Paragraph>
     <li> Press on <Emphasize>E</Emphasize> for PASS </li>
     <li> Press on <Emphasize>S</Emphasize> for SHOT </li>
     <li> Press on <Emphasize>W</Emphasize> for NEUTRAL </li>
-    <li> Press on <Emphasize>SPACE</Emphasize> to switch teams </li>
-    <li> Press on <Emphasize>?</Emphasize> to display all shortcuts </li>
+    <li> Press on <Emphasize>Space</Emphasize> to switch teams </li>
+    <li> Press on <Emphasize>1, 2, 3</Emphasize> to toggle Body-part</li>
+    <li> Press on <Emphasize>Enter</Emphasize> to submit Event </li>
+    <li> Press on <Emphasize>A</Emphasize> Add extra (Areal-win)</li>
+    <li> Press on <Emphasize>B</Emphasize> Add extra (Back-wheel)</li>
+    <li> Press on <Emphasize>ESC</Emphasize> to reset state</li>
   </ul>
 </Paragraph>

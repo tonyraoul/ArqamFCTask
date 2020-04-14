@@ -13,8 +13,8 @@ return  <div className={className}>
   <div className='table'>{children}</div>
   <div className='submit-button-container'>
     {/** slicing first 3 letters for FC is not ideal */}
-    <button className={`submit-button ${HomeGuest === 'HOME' && 'active'}`}>o<div className='club-name'>{HomeClubName.slice(0, 3)}</div></button>
-    <button className={`submit-button guest ${HomeGuest === 'GUEST' && 'active'}`}>o<div className='club-name'>{GuestClubName.slice(0, 3)}</div></button>
+    <button className={`submit-button ${HomeGuest === 'HOME' && 'active'}`}>▶<div className='club-name'>{HomeClubName.slice(0, 3)}</div></button>
+    <button className={`submit-button guest ${HomeGuest === 'GUEST' && 'active'}`}>▶<div className='club-name'>{GuestClubName.slice(0, 3)}</div></button>
   </div>
 </div>
 }
@@ -50,13 +50,14 @@ export const PassTableElement = styled(TableElement)`
       width: 20px;
       padding: 5px;
       flex-grow: 1;
-      background: linear-gradient(90deg, #FF0000 2.55%, #FF7A00 99.99%, #FF7A00 100%);
+      background: linear-gradient(90deg, #FF0000, #FF7A00, #FF7A00);
       color: white;
       cursor: pointer;
       border: 0;
-      box-sizing: border-box;
+      box-sizing: content-box;
+      border: 2px solid transparent;
     &.active {
-      border: 1px solid yellow;
+      border: 2px solid yellow;
     }
     &.guest {
       background: linear-gradient(90deg, #031965 0%, #0031DE 100%);

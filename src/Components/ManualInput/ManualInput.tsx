@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import useKey from '@rooks/use-key';
 import { 
   Cell,
@@ -12,14 +12,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { addEvent, toggleHomeGuest, setToggleByName, resetForm } from '../../Actions';
 import { ApplicationState } from '../../Reducers';
-import Toggles, { ITogglesState } from '../../Reducers/Toggles';
-import { IType } from '../../Types';
-import { Height, TYPE, BP, passShoot, ExtraPamaters, Extras } from '../../EventsTable';
+import  { ITogglesState } from '../../Reducers/Toggles';
+import { Height, TYPE, BP, Extras } from '../../EventsTable';
 
 const PASS_TYPES: TYPE[] = [TYPE.OPENPLAY, TYPE.KICKOFF, TYPE.THROWIN]
 const PassTable = () => {
 const Toggles  = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
-const { AvailableExtras, PassShoot, Type } = Toggles
+const { PassShoot, Type } = Toggles
 return <PassTableElement>
   <Row>
     <Cell className='title'>
@@ -44,7 +43,7 @@ return <PassTableElement>
 
 const SHOOT_TYPES: TYPE[] = [TYPE.OPENPLAY, TYPE.FREEKICK, TYPE.PENALTY, TYPE.CORNER]
 const ShootTable = () => {
-const { AvailableExtras, PassShoot, Type, BP: TogglesBP }  = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+const { PassShoot, Type, BP: TogglesBP }  = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
 return <PassTableElement>
   <Row>
     <Cell className='title'>
@@ -76,8 +75,20 @@ const toggleArrayValue = (value: string, arr: string[]): string[] => {
 
 export const ManualInput = () => {
 const toggles = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
-const { HomeGuest } = toggles
 const dispatch = useDispatch()
+const submitEvent = () => {
+  if(toggles.PassShoot && toggles.BP && toggles.Type) {
+    dispatch(addEvent({
+      passShoot: toggles.PassShoot,
+      BP: toggles.BP,
+      Height: toggles.Height,
+      Club: toggles.HomeGuest,
+      type: toggles.Type,
+      Extras: toggles.Extras,
+    }))
+    dispatch(resetForm())
+  }
+}
 useEffect(() => {
   if(toggles.PassShoot === 'SHOOT') {
     if(toggles.BP === 'H') {
@@ -99,20 +110,8 @@ useEffect(() => {
     dispatch(setToggleByName('AvailableExtras', []))
   }
 }, [toggles.BP, dispatch, toggles.PassShoot])
-// Not useful very under current UX
-useKey('Enter', () => {
-  if(toggles.PassShoot && toggles.BP && toggles.Type) {
-    dispatch(addEvent({
-      passShoot: toggles.PassShoot,
-      BP: toggles.BP,
-      Height: toggles.Height,
-      Club: toggles.HomeGuest,
-      type: toggles.Type,
-      Extras: toggles.Extras,
-    }))
-    dispatch(resetForm())
-  }
-})
+
+useKey('Enter', submitEvent)
 useKey('s', () => {
   dispatch(resetForm())
   dispatch(setToggleByName('PassShoot', 'SHOOT'))
@@ -171,13 +170,9 @@ useKey('3', () => {
 useKey('Space', () => {
   dispatch(toggleHomeGuest())
 })
-const invalidityMatrix = [
-  {passShoot: "PASS", type: "Throw-in", height: "G"},
-  {passShoot: "PASS", type: "Throw-in", BP: "LF"},
-  {passShoot: "PASS", type: "Throw-in", BP: "H"},
-  {passShoot: "PASS", type: "Throw-in", BP: "RF"},
-]
-return (<Fragment>
+useKey('Escape', () => dispatch(resetForm()))
+
+return (<>
   <Section>
      <SectionTitle>Passes</SectionTitle>
      <PassTable />
@@ -186,5 +181,5 @@ return (<Fragment>
      <SectionTitle>Shoots</SectionTitle>
      <ShootTable />
   </Section>
-</Fragment>)
+</>)
 }
