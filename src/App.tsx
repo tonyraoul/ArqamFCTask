@@ -10,6 +10,9 @@ import { ManualInput } from './Components/ManualInput';
 const GlobalStyle = createGlobalStyle`
   ${reset}
   /* other styles */
+  button::-moz-focus-inner {
+    border: 0;
+  }
   `
 interface AppProps {
   className?: string,

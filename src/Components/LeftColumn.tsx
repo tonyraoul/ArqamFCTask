@@ -3,7 +3,7 @@ import {VideoPlayer} from './VideoPlayer'
 import styled from 'styled-components'
 import {Card} from './Card'
 import { History } from './History'
-import { MatchTimer } from './ManualInput/MatchTimer'
+import { MatchTimer } from './MatchTimer'
 
 const Container= styled.div`
   display: flex;

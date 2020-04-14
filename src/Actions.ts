@@ -1,9 +1,20 @@
-import { ADD_EVENT, TOGGLE_HOMEGUEST } from "./ActionTypes";
+import { ADD_EVENT, TOGGLE_HOMEGUEST, SET_TOGGLE_BY_NAME, RESET_FORM } from "./ActionTypes";
 
 let eventID = 0;
 
 export interface toggleHomeGuestType {
   type: typeof TOGGLE_HOMEGUEST,
+}
+export interface resetFormType {
+  type: typeof RESET_FORM,
+}
+
+export interface setToggleByNameType {
+  type: typeof SET_TOGGLE_BY_NAME,
+  payload: {
+    name: string,
+    value: string | string[]
+  }
 }
 export interface AddEventActionType {
     type: typeof ADD_EVENT,
@@ -20,7 +31,7 @@ export interface IEventContent {
   BP?: 'H' | 'LF' | 'RF',
   Height?: 'G' | 'L' | 'H',
   Extras?: 'BW' | 'A',
-  Club?: 'HOME' | 'GUEST'
+  Club: 'HOME' | 'GUEST'
 }
 
 export const addEvent = (EventPayload: IEventContent): AddEventActionType => ({
@@ -36,4 +47,16 @@ export const toggleHomeGuest = () => ({
   type: TOGGLE_HOMEGUEST
 })
 
-export type ActionType = AddEventActionType | toggleHomeGuestType
+export const setToggleByName = (name: string, value: string | string[]) => ({
+  type: SET_TOGGLE_BY_NAME,
+  payload: {
+    name,
+    value
+  }
+})
+
+export const resetForm = () => ({
+  type: RESET_FORM
+})
+
+export type ActionType = AddEventActionType | toggleHomeGuestType | setToggleByNameType | resetFormType

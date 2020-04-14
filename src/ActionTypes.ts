@@ -1,2 +1,4 @@
 export const ADD_EVENT = 'ADD_EVENT'
 export const TOGGLE_HOMEGUEST = 'TOGGLE_HOMEGUEST'
+export const SET_TOGGLE_BY_NAME = 'SET_TOGGLE_BY_NAME'
+export const RESET_FORM = 'RESET_FORM'

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import addZero from 'add-zero'
-import { ApplicationState } from '../../Reducers'
-import { ITogglesState } from '../../Reducers/Toggles'
+import { ApplicationState } from '../Reducers'
+import { ITogglesState } from '../Reducers/Toggles'
 
 export const MatchTimer = () => {
 

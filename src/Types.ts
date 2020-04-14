@@ -1,0 +1,5 @@
+export type IType = 'Open-Play' | 'Free-kick'| 'Penalty'| 'Corner' | 'Kick-off' | 'Throw-in'
+export type IPassShoot = 'PASS' | 'SHOOT'
+export type IHeight = 'L' | 'G' | 'H'
+export type IBP = 'LF' | 'RF' | 'H'
+export type IExtra = 'BW' | 'A' | 'D' | 'F' | 'R'

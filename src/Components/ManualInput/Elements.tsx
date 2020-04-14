@@ -1,11 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
+import { ApplicationState } from '../../Reducers'
+import { ITogglesState } from '../../Reducers/Toggles'
+import { IType, IPassShoot, IExtra } from '../../Types'
+import { setToggleByName, resetForm } from '../../Actions'
+import { TYPE } from '../../EventsTable'
 
-export const TableElement = ({children, className }: {children: React.ReactNode, className?: string}) =>
-<div className={className}>
+export const TableElement = ({children, className }: {children: React.ReactNode, className?: string}) => {
+  const { HomeClubName, GuestClubName, HomeGuest } = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
+return  <div className={className}>
   <div className='table'>{children}</div>
-  <button className='submit-button'>o</button>
+  <div className='submit-button-container'>
+    {/** slicing first 3 letters for FC is not ideal */}
+    <button className={`submit-button ${HomeGuest === 'HOME' && 'active'}`}>o<div className='club-name'>{HomeClubName.slice(0, 3)}</div></button>
+    <button className={`submit-button guest ${HomeGuest === 'GUEST' && 'active'}`}>o<div className='club-name'>{GuestClubName.slice(0, 3)}</div></button>
+  </div>
 </div>
+}
 
 export const TableButtonElement = ({children, ...props}: any) => <button {...props}>
   {children}
@@ -31,14 +43,32 @@ export const Underline = styled.div `
 export const PassTableElement = styled(TableElement)`
   display: flex;
   flex-direction: row;
-  .submit-button {
-    width: 20px;
-    margin: 15px 0;
-    padding: 5px;
-    background-color: #FF5252;
-    color: white;
-    cursor: pointer;
-    border: 0;
+  .submit-button-container {
+    display: flex;
+    flex-direction: column;
+    .submit-button {
+      width: 20px;
+      padding: 5px;
+      flex-grow: 1;
+      background: linear-gradient(90deg, #FF0000 2.55%, #FF7A00 99.99%, #FF7A00 100%);
+      color: white;
+      cursor: pointer;
+      border: 0;
+      box-sizing: border-box;
+    &.active {
+      border: 1px solid yellow;
+    }
+    &.guest {
+      background: linear-gradient(90deg, #031965 0%, #0031DE 100%);
+    }
+    .club-name {
+      width: 100%;
+      font-size: 8px;
+      font-family: IBM Plex Mono;
+      text-transform: uppercase;
+      margin: 10px auto;
+    }
+    }
   }
   .table {
     margin: 20px 0;
@@ -93,18 +123,50 @@ export const TableButton = styled(TableButtonElement)`
   background: #DDD;
  }
 `
+interface SelectionGroupProps {
+  options: string[],
+  type: TYPE,
+  onSelect?: Function,
+  passShoot: IPassShoot,
+  name: 'BP' | 'Extras' | 'Height'
+}
+export const SelectionGroup = ({
+  options,
+  type,
+  passShoot,
+  onSelect,
+  name,
+  }:SelectionGroupProps) => {
+  const dispatch = useDispatch()
+  const toggles = useSelector<ApplicationState, ITogglesState>(state => state.Toggles)
 
-export const SelectionGroup = ({ selected, options, type, onSelect, selectedType }: { selected: string, options: string[], type: string, onSelect?: Function, selectedType?: string }) => {
   return (
     <Cell>
       {
-        options.map(option =>
-                    <TableButton
-                      key={option}
-                      onClick={() => { onSelect && onSelect(type, option)}}
-                      selected={selected === option && type === selectedType }>
-                      {option}
-                      </TableButton>
+        options?.map(option =>
+          <TableButton
+            key={option}
+            onClick={
+              () => {
+                if(passShoot !== toggles.PassShoot || type !== toggles.Type) {
+                  dispatch(resetForm())
+                  dispatch(setToggleByName('PassShoot', passShoot))
+                }
+                dispatch(setToggleByName('Type', type))
+                if(name !== 'Extras') {
+                    dispatch(setToggleByName(name, option))
+                } else {
+                  if(!toggles['Extras'].find(x => x === option)) {
+                    dispatch(setToggleByName(name, [...toggles['Extras'], option]))
+                  } else {
+                    dispatch(setToggleByName(name, [...toggles['Extras'].filter(x => x !== option)]))
+                  }
+                }
+              }
+            }
+            selected={ toggles.PassShoot === passShoot && toggles.Type === type &&  (toggles[name] === option || (toggles as any)[name]?.includes(option)) }>
+            {option}
+          </TableButton>
         )
       }
     </Cell>

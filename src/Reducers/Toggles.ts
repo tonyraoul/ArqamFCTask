@@ -1,5 +1,7 @@
 import { ActionType } from "../Actions";
-import { TOGGLE_HOMEGUEST } from "../ActionTypes";
+import { TOGGLE_HOMEGUEST, SET_TOGGLE_BY_NAME, RESET_FORM } from "../ActionTypes";
+import { IPassShoot, IType, IHeight, IBP, IExtra } from "../Types";
+import { PassShoot, BodyPart } from "../EventsTable";
 
 export interface ITogglesState {
     HomeGuest: 'HOME' | 'GUEST',
@@ -7,6 +9,12 @@ export interface ITogglesState {
     GuestClubName: string,
     StartTime?: number,
     AccMinutes: number, // Minutes to compensate for Last half(s) + Extratime
+    PassShoot?: PassShoot,
+    Type?: IType,
+    Height?: IHeight,
+    BP?: BodyPart,
+    Extras: IExtra[],
+    AvailableExtras: IExtra[]
 }
 const initialState: ITogglesState = {
     HomeGuest: 'HOME',
@@ -14,6 +22,8 @@ const initialState: ITogglesState = {
     GuestClubName: 'Tottenham',
     AccMinutes: 1000 * 60 * 60,
     StartTime: Date.now(), // TODO: Fetch from API
+    Extras: [],
+    AvailableExtras: [],
 };
 
 export default function(state = initialState, action: ActionType) {
@@ -23,6 +33,21 @@ export default function(state = initialState, action: ActionType) {
         ...state,
         HomeGuest: state.HomeGuest === 'HOME' ? 'GUEST' : 'HOME'
       };
+    }
+    case SET_TOGGLE_BY_NAME: {
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value
+      }
+    }
+    case RESET_FORM: {
+      return {
+        ...state,
+        BP: '',
+        Height: '',
+        Extras: [],
+        PassShoot: ''
+      }
     }
     default:
       return state;
