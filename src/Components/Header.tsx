@@ -3,18 +3,18 @@ import styled from "styled-components";
 
 const Elem = styled.div`
   width: 100%;
-  min-height: 20px;
+  min-height: 10px;
   font-family: IBM Plex Mono;
   box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.4);
   display: flex;
-  .container {
+  margin-bottom: 20px;
+  && .container {
     width: 100%;
     max-width: 1280px;
     margin: auto;
-    display: flex;
-    flex-direction: row;
     vertical-align: center;
     align-items: center;
+    padding: 8px;
   }
   .right-shift {
     margin-left: auto;
@@ -33,7 +33,7 @@ const Elem = styled.div`
     .logo {
       box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.25);
       position: relative;
-      bottom: 20px;
+      bottom: 10px;
       background: white;
       width: 60px;
       padding: 5px;
