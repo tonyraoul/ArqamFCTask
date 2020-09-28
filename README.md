@@ -1,7 +1,3 @@
-## Design Link
-I have developed a POC in this [link](https://www.figma.com/file/qCEoIztCMmIvNgKy3alBkZ/ArkamFC?node-id=0%3A1) that contains more features than I developed 
-
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
